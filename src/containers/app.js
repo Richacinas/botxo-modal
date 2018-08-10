@@ -1,19 +1,34 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadApp } from 'actions/app';
-import styles from './app.css';
+import { bindActionCreators } from 'redux';
 
-type Props = {
-  dispatch: () => void,
-  loaded: boolean
-}
+import * as appActions from 'redux/actions/app';
+import styles from './app.scss';
+ 
+import { Dashboard } from 'components';
 
-export class AppContainer extends Component {
-  componentDidMount() {
-    this.props.dispatch(loadApp());
+@connect(
+  (state, props) => ({
+    loaded: state.app.loaded
+  }),
+  dispatch => bindActionCreators({...appActions}, dispatch)
+)
+
+export default class AppContainer extends Component {
+
+  static propTypes = {
+    dispatch: PropTypes.func,
+    loaded: PropTypes.bool
+  };
+
+  constructor(props) {
+    super(props);
   }
 
-  props: Props;
+  componentDidMount() {
+    this.props.loadApp();
+  }
 
   render() {
     if (!this.props.loaded) {
@@ -21,15 +36,9 @@ export class AppContainer extends Component {
     }
 
     return (
-      <div className={styles.container} />
+      <div className="app">
+        <Dashboard />
+      </div>
     );
   }
 }
-
-function mapStateToProperties(state) {
-  return {
-    loaded: state.app.loaded
-  };
-}
-
-export default connect(mapStateToProperties)(AppContainer);

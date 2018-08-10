@@ -24,49 +24,23 @@ module.exports = {
   output: {
     filename: '[hash].js',
   },
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   plugins: [htmlWebpackPlugin, definePlugin],
   resolve: {
-    modules: ['node_modules', path.join(__dirname, 'src')]
+    modules: ['node_modules', path.join(__dirname, 'src')],
+    extensions: ['.js', '.jsx']
   },
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader'
-      }, {
-        test: /\.html$/,
-        loader: 'html-loader'
-      }, {
-        test: /\.css$/,
-        use: stylesheetsLoaders
-      }, {
-        test: /\.scss$/,
-        use: [...stylesheetsLoaders, {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: true
-          }
-        }]
-      }, {
-        test: /\.sass$/,
-        use: [...stylesheetsLoaders, {
-          loader: 'sass-loader',
-          options: {
-            indentedSyntax: 'sass',
-            sourceMap: true
-          }
-        }]
-      }, {
-        test: /\.less$/,
-        use: [...stylesheetsLoaders, {
-          loader: 'less-loader',
-          options: {
-            sourceMap: true
-          }
-        }]
-      }
+    loaders: [
+      //Añadir 'eslint-loader' al final de este objeto para lintear código
+      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel-loader']},
+      { test: /\.min\.scss$/, loader: 'style-loader!css-loader?url=false' },
+      { test: /\.scss$/, exclude: /\.min\.scss$/, loader: 'style-loader!css-loader?modules&importLoaders=2&sourceMap&localIdentName=[local]!autoprefixer-loader?{browsers:["last 2 version", "iOS >= 8"]}!sass-loader?outputStyle=expanded&sourceMap' },
+      { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
+      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader" },
+      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=image/svg+xml" }
     ]
   },
   devServer: {

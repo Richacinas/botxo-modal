@@ -1,0 +1,15 @@
+export const APP_LOAD 				= 'APP_LOAD';
+export const SET_TUTORIAL_CHAPTER 	= 'SET_TUTORIAL_CHAPTER';
+export const SET_TUTORIAL_SLIDE 	= 'SET_TUTORIAL_SLIDE';
+export const OPEN_MODAL 			= 'OPEN_MODAL';
+export const CLOSE_MODAL 			= 'CLOSE_MODAL';
+export const TOGGLE_MODAL 			= 'TOGGLE_MODAL';
+
+export default { 
+	APP_LOAD,
+	SET_TUTORIAL_CHAPTER,
+	SET_TUTORIAL_SLIDE,
+	OPEN_MODAL,
+	CLOSE_MODAL,
+	TOGGLE_MODAL
+};

@@ -1,0 +1,82 @@
+.tutorial {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .content {
+    flex: 1;
+
+    .chapters {
+      max-width: 25%;
+      height: 100%;
+
+      ul {
+        display: flex;
+        flex-direction: column;
+
+        li {
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  .number {
+    background: lightblue;
+    border-radius: 100%;
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .titles {
+    text-align: center;
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-around;
+
+    ul {
+      display: flex;
+
+      li {
+        margin: 0 0.5rem;
+      }
+    }
+  }
+
+  .bullet {
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: lightgray;
+    border-radius: 100%;
+    transition: all 350ms linear;
+    cursor: pointer;
+
+    &:hover {
+      background: black;
+    }
+  }
+
+  .linkStyled {
+    cursor:pointer;
+    color:blue;
+    text-decoration:underline;
+    transition: all 350ms linear;
+
+    :hover {
+      text-decoration:none;
+      color: purple;
+    }
+  }
+}
